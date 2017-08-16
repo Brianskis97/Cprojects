@@ -1,0 +1,60 @@
+Brian Sweeney
+Algortithm Design Phase
+
+Question 1:
+	a)To find a number "n" to the power "m" you simply have to
+	multiply the n by itself m times. This will be implemented by
+	having a for loop that will loop n times while multoplying n 
+	to itself.
+
+	b)To implement this with recursion you need to change it from a
+	for loop to a recursive function that will decriment m with each
+	call then multiply n by itself on the return trip.
+Question 2:
+	a)To Determine if the number is prime you check the modulo of 
+	the number "n" and all numbers from 2 to n/2. For this assignment
+	we are assuming that 1 is also a prime number and thus this equation
+	will apply for all numbers from 1 to infinity.
+
+	b)To run the algorithm with the numbers from 1 to 10000 you simply 
+	need to surround it in a for loop that will run from 0 to 10000. The
+	input for the function must be (i+1)
+
+	c)The second algorithm given in part c of the problem also will 
+	effectively check if a given number is prime. It was simply substituted
+	in for the n/2 algorithm used in parts a and b.
+
+	d)To implement the function using an array I decided to have main create
+	the array but then pass the pointer to a function to be populated.
+
+	(n/2) 10000 times		-	1693761 cpu cycles	
+	sqrt(n) 10000 times 		- 	1627561 cpu cycles
+	sqrt(n) array 5000 times	-	1596658 cpu cycles
+	
+	There was a mild time savings when switching from the n/2 to the sqrt(n)
+	and and even better savings when using the sqrt(n) and using the array
+	of all 0's and odd numbers.
+
+Question 3:
+	Running the turtles requires quite a few functions and alorithms.
+	The turtle struct itself has to store:
+	- x position
+	- y position
+	- Pen position
+	- direction (that the turtle is facing)
+	Then the turtle world requres alot more to make sure that the turtle
+	can actually make it around the world.
+	-array of world (20x20 char array)
+	-move command
+		-must check which direction the turtle is facing, get its current
+		location, and check and if it can move that far in that direction.
+	- pen up
+		-must set the value of the pen to 0
+	- pen down
+		- must set the value of the pen to 1
+	- draw array
+		- must loop through the array and print it out line by line to 
+		properly represent the image on the screen
+	- quit
+		- must break the program out of the loop.
+		 				
