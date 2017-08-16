@@ -1,28 +1,44 @@
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 int isPrime(int x);
-int buildArray(int size);
+int buildArray(int array[],int size);
 
 int main(){
-	
-	for(int i = 0; i < 10000; i++)
+	int size;	
+	size = 10000; /*default size of 10000 */
+	int array[size];
+	*array = buildArray(array, size);
+	int start, end, total;
+	start = clock();
+	for(int i = 0; i < size; i++)
 	{
-		if (isPrime(i+1))
+		if(array[i] != 0 && (isPrime(array[i]) == 1))
 		{
-			printf("%d\n", (i+1));
+			printf("%d is a prime number.\n", array[i]);
 		}
-	}		
+	}
+	end = clock();
+	total = end - start;
+	printf("This took: %d clock ticks\n", total);
 
 }
 
-int * buildArray(int size){
-	int[] array;
+int buildArray(int array[], int size){
 
 	for (int i = 0; i <size; i++)
 	{
-		
+		if((i+1)%2==0)
+		{
+			array[i] = 0;
+		}
+		else
+		{
+			array[i] = i + 1;
+		}
 	}
+	return *array;
 }
 
 int isPrime(int x)

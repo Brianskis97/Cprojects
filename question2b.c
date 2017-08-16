@@ -6,7 +6,8 @@ int isPrime(int x);
 
 
 int main(){
-	
+	double start, end, total;
+	start = clock();	
 	for(int i = 0; i < 10000; i++)
 	{
 		if (isPrime(i+1))
@@ -14,6 +15,9 @@ int main(){
 			printf("%d\n", (i+1));
 		}
 	}		
+	end = clock();
+	total = end - start;
+	printf("Execution time: %f clock ticks.", total);
 
 }
 
