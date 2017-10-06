@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+//------------global variables-----------------
+cons-t int size = 5; //sets the size of the array 
+//------------global variables-----------------
+
+//------------Structures-----------------
 typedef struct student
 {
 	int idnum = 0;
@@ -8,9 +13,12 @@ typedef struct student
 	char* major;	
 	float gpa;
 }student; 
+//------------Structures-----------------
 
+//------------Function declaration-----------------
 student* addStudent(student stuin[], int size);
 student createStudent();
+//------------Fucntion declaration-----------------
 
 int main()
 {
@@ -18,7 +26,7 @@ int main()
 	student studentlist[size];
 
 }
-:
+
 student createStudent()
 {
 	student tempstudent;
