@@ -1,58 +1,46 @@
 #include <stdio.h>
+#include <string.h>
 
-//------------global variables-----------------
-cons-t int size = 5; //sets the size of the array 
-//------------global variables-----------------
+const int size = 5;
 
-//------------Structures-----------------
-typedef struct student
-{
-	int idnum = 0;
-	int firstname;
-	int lastname;
-	char* major;	
+typedef struct student {
+	int ID;
+	char *firstname;
+	char *lastname;
+	char *major;
 	float gpa;
-}student; 
-//------------Structures-----------------
+}student;
 
-//------------Function declaration-----------------
-student* addStudent(student stuin[], int size);
 student createStudent();
-//------------Fucntion declaration-----------------
 
 int main()
 {
-	int size = 5;
-	student studentlist[size];
-
+	student studentList[size];
+	studentList[0] = createStudent();
+	printf("%s", studentList[0].firstname);
+	printf("%s", studentList[0].lastname);
 }
 
 student createStudent()
 {
 	student tempstudent;
-	printf("Please enter the student's ID number: ");
-	scanf("%d", &tempstudent.idnum);
-	printf("\nPlease enter the student's first name: ");
-	scanf("%s", &tempstudent.firstname);
-	printf("\nPlease enter the student's last name: ");
-	scanf("%s", &tempstudent.lastname);
-	printf("\nPlease enter the student's major name: ");
-	scanf("%s", &tempstudent.major);
-	printf("\nPlease enter the student's first GPA: ");
-	scanf("%f", &tempstudent.firstname);
+	char *firstname, *lastname, *major;
+	tempstudent.firstname = firstname;
+	tempstudent.lastname = lastname;
+	tempstudent.major =  major;
+	printf("\nPlease enter the Student's ID number: ");
+	scanf(" %d", &tempstudent.ID);
+	printf("\nPlease enter the Student's first name: ");
+	scanf(" %s", firstname);
+	getchar();
+	scanf("%*[^\n]%*1[\n]");
+	printf("\nPlease enter the Student's last name: ");
+	scanf(" %s", lastname);
+	printf("\nPlease enter the Student's major: ");
+	scanf(" %s", major);
+	printf("\nPlease enter the Student's GPA: ");
+	scanf(" %f", &tempstudent.gpa);
+
 	return tempstudent;
+
 }
-
-student* addStudent(student stuin[], int size)
-{
-	student tempstudent;
-	for (int i = 0; i < size; i++){
-		tempstudent = createStudent();
-		if (stuin[i].idnum == 0)
-		{
-			stuin[i] = tempstudent;
-		}
-	}
-}
-
-
