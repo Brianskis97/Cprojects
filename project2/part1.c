@@ -6,6 +6,7 @@ const char lower[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o
 const char upper[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
 int getFileSize(FILE *fileIn);
+int getNumWords(char * charInputIn, int fileSizeIn);
 void countLetters(char * charInputIn, int fileSizeIn, int *letterOccur);
 
 int main()
@@ -15,20 +16,21 @@ int main()
     FILE *outFile;
     char *charInput;
     int fileSize;
+    int numWords;
 
     readFile = fopen("test", "r");
     fileSize = getFileSize(readFile);
-    charInput = malloc(fileSize);
-    letterOccur = malloc(fileSize);
+    charInput = malloc(fileSize * sizeof(char));
+    letterOccur = malloc(fileSize * sizeof(char));
 
     for (int i = 0; i <alphaSize; i++)
     {
         letterOccur[i] = 0;    
     }
 
-
     while(fgets(charInput,(fileSize+1),readFile) != NULL){}
 
+    numWords = getNumWords(charInput, fileSize);
     countLetters(charInput, fileSize, letterOccur);
 
     for (int i = 0; i < alphaSize; i++)
@@ -37,12 +39,14 @@ int main()
     }
     
         
+    
+    free(charInput);
+    free(letterOccur);
+    return 0;
 }
 
 void countLetters(char * charInputIn, int fileSizeIn, int *letterOccur)
 {
-
-
     for (int i = 0; i < fileSizeIn; i++)
     {
         for (int j = 0; j < alphaSize; j++)
@@ -53,8 +57,6 @@ void countLetters(char * charInputIn, int fileSizeIn, int *letterOccur)
             }
         }
     }
-
-
 }
 
 int getFileSize( FILE *fileIn)
@@ -70,4 +72,19 @@ int getFileSize( FILE *fileIn)
     fseek(fileIn, 0L, SEEK_SET);
 
     return size;
+}
+
+int getNumWords(char * charInputIn, int fileSizeIn)
+{
+    int counter = 0;
+
+    for (int i = 0; charInputIn[i] != '\0'; i++)
+    {
+        if (charInputIn[i] == ' ')
+        {
+            counter = counter + 1;
+        }
+    }
+
+    return counter;
 }
