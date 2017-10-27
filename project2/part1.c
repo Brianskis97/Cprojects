@@ -8,6 +8,8 @@ const char upper[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O
 int getFileSize(FILE *fileIn);
 int getNumWords(char * charInputIn, int fileSizeIn);
 void countLetters(char * charInputIn, int fileSizeIn, int *letterOccur);
+void createWordsList(char **wordsListIn, int numWords, int fileSizeIn, char * charInputIn);
+
 
 int main()
 {
@@ -17,6 +19,7 @@ int main()
     char *charInput;
     int fileSize;
     int numWords;
+	char **wordsList;
 
     readFile = fopen("test", "r");
     fileSize = getFileSize(readFile);
@@ -32,6 +35,8 @@ int main()
 
     numWords = getNumWords(charInput, fileSize);
     countLetters(charInput, fileSize, letterOccur);
+	wordsList = calloc(numWords, 100);
+	createWordsList(wordsList, numWords, fileSize, charInput);
 
     for (int i = 0; i < alphaSize; i++)
     {
@@ -87,4 +92,9 @@ int getNumWords(char * charInputIn, int fileSizeIn)
     }
 
     return counter;
+}
+
+void createWordsList(char **wordsListIn, int numWords, int fileSizeIn, char * charInputIn)
+{
+	
 }
