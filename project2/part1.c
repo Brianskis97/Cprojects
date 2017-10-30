@@ -5,7 +5,8 @@
 const int alphaSize = 26;
 const char lower[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 const char upper[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-const char symbols[] = {'~', '!', '@', '#', '$', '%', '^', '&', '*', '(', '_', '+', '-', '=', ')', '\\', '[', ']', '{', '}', ':', ';', '<', '>', ',', '.', '/', '?', '"'};
+const char numbers[] = {'0','1','2','3','4','5','6','7','8','9'};
+const char symbols[] = {'~', '!', '@', '#', '$', '%', '^', '&', '*', '(', '_', '+', '-', '=', ')', '\\', '[', ']', '{', '}', ':', ';', '<', '>', ',', '.', '/', '?', '"', '\n', '\t', '\r'};
 //---------------------------------------------------------Constant Variables---------------------------------------------------------------end
 
 //---------------------------------------------------------Non Struct-Dependent Function Declarationss---------------------------------------------------------------start
@@ -14,6 +15,7 @@ int getNumWords(char *charInputIn, int fileSizeIn);
 void countLetters(char *charInputIn, int fileSizeIn, int *letterOccur);
 void createWordsList(char **wordsListIn, int numWords, int fileSizeIn, char *charInputIn);
 int isSymbol(char input);
+int isNumber(char input);
 int getWordLength(char *word);
 //---------------------------------------------------------Non Struct-Dependent Function Declarations---------------------------------------------------------------end
 
@@ -55,6 +57,7 @@ int main(int argc, char *argv[])
         FILE *readFile;
         FILE *outFile;
         char *charInput;
+        char *buffer;
         int fileSize;
         int numWords;
         char **wordsList;
@@ -66,6 +69,7 @@ int main(int argc, char *argv[])
         {
             fileSize = getFileSize(readFile);
             charInput = malloc(fileSize * sizeof(char));
+            buffer = malloc(fileSize * sizeof(char));
             letterOccur = malloc(fileSize * sizeof(char));
 
             for (int i = 0; i < alphaSize; i++)
@@ -73,9 +77,11 @@ int main(int argc, char *argv[])
                 letterOccur[i] = 0;
             }
 
-            while (fgets(charInput, (fileSize + 1), readFile) != NULL)
+            while (fgets(buffer, (fileSize + 1), readFile) != NULL)
             {
+                charInput = strcat(charInput, buffer);
             }
+            free(buffer);
 
             numWords = getNumWords(charInput, fileSize);
             countLetters(charInput, fileSize, letterOccur);
@@ -264,7 +270,7 @@ void createWordsList(char **wordsList, int numWords, int fileSizeIn, char *charI
     for (int i = 0; i < fileSizeIn; i++)
     {
         temp = charInputIn[i];
-        if (isSymbol(temp) == 1)
+        if (isSymbol(temp) == 1 || isNumber(temp) == 1)
         {
         }
 
@@ -288,6 +294,21 @@ int isSymbol(char input)
     int flag = 0;
     int sizeSymbols = (sizeof(symbols) / sizeof(char));
     for (int i = 0; i < sizeSymbols; i++)
+    {
+        if (input == symbols[i])
+        {
+            flag = 1;
+        }
+    }
+
+    return flag;
+}
+
+int isNumber(char input)
+{
+    int flag = 0;
+    int sizeNumbers = (sizeof(numbers) / sizeof(char));
+    for (int i = 0; i < sizeNumbers; i++)
     {
         if (input == symbols[i])
         {
