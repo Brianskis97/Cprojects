@@ -1,0 +1,61 @@
+Brian Sweeney
+CS 350 Assignment 2
+Algorithms Document
+
+Part 1 - String Processing
+
+The text must be read in from a file to a character array to be processed by the program.
+    - This should utilize dynamic memory
+    - total character count must be gathered before input to assign array size
+    - new line symbols will be converted to spaces to properly count words
+
+Letters from character array (excluding symbols) are compared to a global constant alphabet (upper and lowercase)
+and the number of occurences stored in an array to be displayed or saved to a text file.
+
+Text must be parsed into a words list
+    - total amount of words gathered by counting spaces
+    - Assign words list size using dynamic memory based on amount of words
+    - read each character into the words list then increment string based on a space or new line
+
+Words must have thier length counted and put into a list to display
+    - the length of a word is counted and if it is a new length, the length is stored in an array and
+        the position in a corresponding "counting" array is set to 1.
+    - if the length of a word is counted and it already exists the corresponding position of that
+        length in the counting array is incremented.
+
+Words must be compared and put into a list to display
+    - each word is checked against the word list and if it is not found or the words list
+        is empy the word is inserted to the list the corresponding position in the 
+        counting array is set to 1
+    - if the word is checked against the word list and it is found, the corresponding postition
+        in the couting array is incremented by 1
+The words list is then sorted utalizing the bubble sort algorithm. 
+
+Part 2 - Image Processing
+
+The image is read into a unsigned char array using the provided iplib2New.c functions.
+
+The image is then sent to functions to calculate the edge response width and height.
+    - these funcitons take in the image pointer and a new image poniter to be 
+        filled with the edge response data
+    - the edge response is calculated with a 3x3 mask
+
+The two edge response images are then sent to another function to be combined
+into one edge response image
+    - the two edge response image pointers are sent to the function along
+        with the poninter for the final edge response image
+    - the final edge response image is then filled with data by adding
+        the values of the two previous edge response images together
+
+Each edge response image is the prossesed and a corresponding binary images is 
+created for each edge response image.
+    - to create the binary image the average pixel value for the entire
+        image is calculated
+    - the standard deviation between pixel values is also calculated
+    - these two values are then used along with a constant "K" to 
+        produce the binary threshold.
+    - each pixel from the provided edge response image is compared to
+        the threshold and if it is above it is set to white(255) and if it
+        is below it is set to black (0)
+
+All of the images are then exported to pgm files using the provided library.
